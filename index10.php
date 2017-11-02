@@ -11,6 +11,8 @@
 ^ - начало строки
 $ - Конец строки
 \b - граница слова
+Маска - это часть строки которую требуется захватить, записывается круглыми скобками.
+(?P<name) - подмаске дается имя
 */
 $text = "It rains cats and dogs";
 preg_match_all(
@@ -20,6 +22,14 @@ preg_match_all(
 $text = "It rains cats and dogs.\nCats and dogs.";
 preg_match_all(
     '~\.$~m',//Точка стоящая в конце строки, многострочный
+    $text, $mas
+);
+preg_match_all(
+    '~(cat|dog)s~m',//альтернатива, cat или dog после которого идет буква "s"
+    $text, $mas
+);
+preg_match_all(
+    '~It (?P<name1>\w+) (?P<name2>\w+)~',//Поиск двух слов идущих через пробел
     $text, $mas
 );
 echo "<pre>";
